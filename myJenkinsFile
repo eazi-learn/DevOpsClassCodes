@@ -1,45 +1,57 @@
-pipeline {
+#Jenkinsfile
 
+pipeline {
+  
     agent any
-    tools {
-        maven 'MAVEN_HOME'
-    }
+
     stages {
-        stage('Clonerepo') {
+
+        stage("build") {
+
             steps {
-                git 'https://github.com/eazi-learn/DevOpsClassCodes.git'
+                echo 'building the application'
             }
+
         }
-        stage('Compile') {
+
+          stage("review") {
+
             steps {
-                sh 'mvn compile'
+              echo 'reviewing the application code'
             }
+
         }
-        stage(CodeReview) {
-            agent any
+
+          stage("test") {
+
             steps {
-                sh 'mvn pmd:pmd'
+              echo 'testing the application'
             }
-            post {
-  success {
-    recordIssues(tools: [pmdParser(pattern: '**/pmd.xml')])
-  }
-}
+
         }
-        stage(UnitTesting){
+
+          stage("deploy") {
+
             steps {
-                sh 'mvn test'
+              echo 'deploy the application
             }
+
         }
-        stage('Codecoverage'){
+
+         stage("package") {
+
             steps {
-               sh 'mvn verify'   
+            echo 'packaging the application war file
+
             }
+
         }
-        stage('Package'){
-            steps {
-               sh 'mvn package'   
-            }
-        }
+
     }
+
+}
+
+node {
+  
+    // groovy script
 }
