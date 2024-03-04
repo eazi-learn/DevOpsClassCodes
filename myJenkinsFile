@@ -33,15 +33,15 @@ pipeline {
           stage("deploy") {
 
             steps {
-              echo 'deploy the application
+              echo 'deploy the application'
             }
 
         }
 
          stage("package") {
 
-            steps {
-            echo 'packaging the application war file
+            steps {      
+            echo 'packaging the application war file'
 
             }
 
